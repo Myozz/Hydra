@@ -12,3 +12,7 @@
 Dưới đây sẽ các có command sử dụng Hydra trên SSH và web form (POST method)
 
 ### SSH
+      hydra -l <username> -P <full path to pass> MACHINE_IP -t 4 ssh   
+- ```-l```: Điền username mục tiêu để login
+- ```-p```: Path của password list
+- ```-t```: Số Threads sử dụng để chạy
