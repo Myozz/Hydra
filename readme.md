@@ -26,7 +26,6 @@ Dưới đây sẽ các có command sử dụng Hydra trên SSH và web form (PO
 * Ta có thể sử dụng Hydra để brute force web form. Bạn phải biết rằng loại request của nó, GET hay POST là các phương thức thường được sử dụng. Bạn có thể sử dụng tab của browser (Bằng developer tool - F12) để kiểm tra loại request hoặc check source code
 
       sudo hydra <username> <wordlist> MACHINE_IP http-post-form "<path>:<login_credentials>:<invalid_response>"
-* Chú thích:
   - ```-l```: username để login vào web-form
   - ```-p```: pass list được sử dụng
   - ```http-post-form```: loại form là POST 
@@ -34,3 +33,12 @@ Dưới đây sẽ các có command sử dụng Hydra trên SSH và web form (PO
   - ```<login_credentials>```: Username và pass được sử dụng để log in, VD: ```username=^USER^&password=^PASS^```
   - ```<invalid_response>```: Phẩn hồi khi login thất bại
   - ```-V```: verbose (thế thôi :||)
+ 
+* Một ví dụ cụ thể hơn:
+
+      hydra -l myozz -p rockyou.txt 192.168.1.1 http-post-form "/login:username=^USER^&password=^PASS^:F=Password is incorrect" -V
+  - ```myozz``` là tên user
+  - ```rockyou.txt``` là wordlist
+  - ```http-post-form``` là method của web (check ở source code), nó còn có thể là GET
+  - ```/login``` là pth 192.168.1.1/login của web, tuỳ vào từng web mà thay đổi path
+  - Phần thông báo incorrect cũng thay đổi theo từng web (có thể check source để tìm)
